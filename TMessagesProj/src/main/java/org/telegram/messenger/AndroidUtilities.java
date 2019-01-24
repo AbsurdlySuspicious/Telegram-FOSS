@@ -2181,12 +2181,10 @@ public class AndroidUtilities {
     }*/
 
     public static void startAppCenter(Activity context) {
-        
     }
 
     private static long lastUpdateCheckTime;
     public static void checkForUpdates() {
-        
     }
 
     public static void addToClipboard(CharSequence str) {
