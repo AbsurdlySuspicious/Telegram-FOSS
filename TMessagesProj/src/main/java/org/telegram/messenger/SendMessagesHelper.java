@@ -5563,7 +5563,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
             sendingMedia.geo = new TLRPC.TL_geoPoint();
             sendingMedia.geo.lat = location.getLatitude();
             sendingMedia.geo._long = location.getLongitude();
-            accountInstance.getSendMessagesHelper().sendMessage(sendingMedia, dialog_id, null, null, null, true, 0);
+            accountInstance.getSendMessagesHelper().sendMessage(sendingMedia, dialog_id, null, null, null, null, true, 0);
         })));
     }
 
