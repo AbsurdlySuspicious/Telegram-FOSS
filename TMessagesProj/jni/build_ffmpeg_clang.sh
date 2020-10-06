@@ -1,26 +1,22 @@
 #!/bin/bash
 set -e
 function build_one {
-    CC="${CROSS_PREFIX}clang"
-    CXX="${CROSS_PREFIX}clang++"
-    AS="${CROSS_PREFIX}clang"
-    AR="${CROSS_PREFIX}ar"
-    LD="${CROSS_PREFIX}ld"
-    NM="${CROSS_PREFIX}nm"
-    STRIP="${CROSS_PREFIX}strip"
+  TOOLCHAIN_PREFIX="${TOOLCHAIN_BASE}/${ARCH}-${ANDROID_API}"
+  SYSROOT="${TOOLCHAIN_PREFIX}/sysroot"
+  CROSS_PREFIX="${TOOLCHAIN_PREFIX}${CROSS_PATH}"
+  
+  CC="${CROSS_PREFIX}clang"
+  CXX="${CROSS_PREFIX}clang++"
+  AS="${CROSS_PREFIX}clang"
+  AR="${CROSS_PREFIX}ar"
+  LD="${CROSS_PREFIX}ld"
+  NM="${CROSS_PREFIX}nm"
+  STRIP="${CROSS_PREFIX}strip"
 
 	echo "Cleaning..."
 	rm -f config.h
 	make clean || true
-	rm -rf ${TOOLCHAIN_PREFIX}
 	
-	echo "Toolchain..."
-	python $NDK/build/tools/make_standalone_toolchain.py \
-	--arch ${ARCH} \
-	--api ${ANDROID_API} \
-	--stl libc++ \
-	--install-dir=${TOOLCHAIN_PREFIX}
-
 	echo "Configuring..."
 
 	./configure \
@@ -135,32 +131,31 @@ checkPreRequisites
 # TODO: fix env variable for NDK
 # NDK=/opt/android-sdk/ndk-bundle
 
+BASEDIR=`pwd`
+TOOLCHAIN_BASE=${BASEDIR}/toolchain-android
+
 cd ffmpeg
 
-BASEDIR=`pwd`
-TOOLCHAIN_PREFIX=${BASEDIR}/toolchain-android
-
 ## common
-SYSROOT=${TOOLCHAIN_PREFIX}/sysroot
 
 #x86_64
 ANDROID_API=21
-PREBUILT=$NDK/toolchains/x86_64-4.9/prebuilt/$BUILD_PLATFORM
-PLATFORM=$NDK/platforms/android-21/arch-x86_64
-CROSS_PREFIX=${TOOLCHAIN_PREFIX}/bin/x86_64-linux-android-
 ARCH=x86_64
 CPU=x86_64
+PREBUILT=$NDK/toolchains/x86_64-4.9/prebuilt/$BUILD_PLATFORM
+PLATFORM=$NDK/platforms/android-21/arch-x86_64
+CROSS_PATH=/bin/x86_64-linux-android-
 PREFIX=./build/$CPU
 ADDITIONAL_CONFIGURE_FLAG="--disable-asm"
 build_one
 
 #arm64-v8a
 ANDROID_API=21
-PREBUILT=$NDK/toolchains/aarch64-linux-android-4.9/prebuilt/$BUILD_PLATFORM
-PLATFORM=$NDK/platforms/android-21/arch-arm64
-CROSS_PREFIX=${TOOLCHAIN_PREFIX}/bin/aarch64-linux-android-
 ARCH=arm64
 CPU=arm64-v8a
+PREBUILT=$NDK/toolchains/aarch64-linux-android-4.9/prebuilt/$BUILD_PLATFORM
+PLATFORM=$NDK/platforms/android-21/arch-arm64
+CROSS_PATH=/bin/aarch64-linux-android-
 OPTIMIZE_CFLAGS=
 PREFIX=./build/$CPU
 ADDITIONAL_CONFIGURE_FLAG="--enable-neon --enable-optimizations"
@@ -169,11 +164,11 @@ build_one
 
 #arm v7n
 ANDROID_API=16
-PREBUILT=$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/$BUILD_PLATFORM
-PLATFORM=$NDK/platforms/android-16/arch-arm
-CROSS_PREFIX=${TOOLCHAIN_PREFIX}/bin/arm-linux-androideabi-
 ARCH=arm
 CPU=armv7-a
+PREBUILT=$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/$BUILD_PLATFORM
+PLATFORM=$NDK/platforms/android-16/arch-arm
+CROSS_PATH=/bin/arm-linux-androideabi-
 OPTIMIZE_CFLAGS="-marm -march=$CPU"
 PREFIX=./build/$CPU
 ADDITIONAL_CONFIGURE_FLAG="--enable-neon"
@@ -181,11 +176,11 @@ build_one
 
 #x86 platform
 ANDROID_API=16
-PREBUILT=$NDK/toolchains/x86-4.9/prebuilt/$BUILD_PLATFORM
-PLATFORM=$NDK/platforms/android-16/arch-x86
-CROSS_PREFIX=${TOOLCHAIN_PREFIX}/bin/i686-linux-android-
 ARCH=x86
 CPU=i686
+PREBUILT=$NDK/toolchains/x86-4.9/prebuilt/$BUILD_PLATFORM
+PLATFORM=$NDK/platforms/android-16/arch-x86
+CROSS_PATH=/bin/i686-linux-android-
 OPTIMIZE_CFLAGS="-march=$CPU"
 PREFIX=./build/$CPU
 ADDITIONAL_CONFIGURE_FLAG="--disable-x86asm --disable-inline-asm --disable-asm"
