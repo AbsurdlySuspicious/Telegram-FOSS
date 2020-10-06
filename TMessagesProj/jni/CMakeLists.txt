@@ -300,7 +300,8 @@ target_include_directories(flac PUBLIC
         exoplayer/libFLAC/include)
 
 #webp
-include(${CMAKE_HOME_DIRECTORY}/libwebp/CMakeLists.txt)
+file(GLOB_RECURSE WEBP_SRC "libwebp/src/*.h" "libwebp/src/*.c")
+add_library(webp STATIC ${WEBP_SRC})
 target_compile_options(webp PUBLIC
         -Wall -finline-functions -ffast-math -Os)
 set_target_properties(webp PROPERTIES
