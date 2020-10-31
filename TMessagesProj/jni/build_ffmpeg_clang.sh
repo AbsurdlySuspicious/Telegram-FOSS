@@ -131,9 +131,6 @@ checkPreRequisites
 # TODO: fix env variable for NDK
 # NDK=/opt/android-sdk/ndk-bundle
 
-BASEDIR=`pwd`
-TOOLCHAIN_BASE=${BASEDIR}/toolchain-android
-
 cd ffmpeg
 
 ## common
