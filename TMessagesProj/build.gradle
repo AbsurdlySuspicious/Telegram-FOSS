@@ -282,6 +282,20 @@ android {
                 abiVersionCode = 9
             }
         }
+        arm {
+            ndk {
+                abiFilters "armeabi-v7a", "arm64-v8a"
+            }
+            sourceSets.debug {
+                manifest.srcFile 'config/debug/AndroidManifest_SDK23.xml'
+            }
+            sourceSets.release {
+                manifest.srcFile 'config/release/AndroidManifest_SDK23.xml'
+            }
+            ext {
+                abiVersionCode = 101
+            }
+        }
     }
 
     defaultConfig.versionCode = 2387
