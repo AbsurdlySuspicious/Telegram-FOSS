@@ -19,5 +19,5 @@ pushd TMessagesProj/jni
 ./build_boringssl.sh
 
 popd
-./gradlew assembleAfatRelease && ./gradlew --stop
+./gradlew assembleArmRelease && ./gradlew --stop
 
