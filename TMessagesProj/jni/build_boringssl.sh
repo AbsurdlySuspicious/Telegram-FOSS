@@ -47,12 +47,6 @@ API=16
 CPU=armeabi-v7a
 build_one
 
-CPU=x86
-build_one
-
 API=21
 CPU=arm64-v8a
-build_one
-
-CPU=x86_64
 build_one
