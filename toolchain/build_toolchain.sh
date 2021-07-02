@@ -22,15 +22,9 @@ PARAM=$1
 BASEDIR=`pwd`
 TOOLCHAIN_BASE=${BASEDIR}/toolchain-android
 
-API=21; ARCH=x86_64;
-build_tc
-
 API=21; ARCH=arm64;
 build_tc
 
 API=16; ARCH=arm;
-build_tc
-
-API=16; ARCH=x86;
 build_tc
 
