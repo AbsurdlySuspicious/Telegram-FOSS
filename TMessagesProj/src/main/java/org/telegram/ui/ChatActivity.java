@@ -19566,7 +19566,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private int sponsoredMessagesPostsBetween;
     private boolean sponsoredMessagesAdded;
     private void addSponsoredMessages(boolean animated) {
-        if (sponsoredMessagesAdded || chatMode != 0 || !ChatObject.isChannel(currentChat) || !forwardEndReached[0] || getUserConfig().isPremium()) {
+        /*if (sponsoredMessagesAdded || chatMode != 0 || !ChatObject.isChannel(currentChat) || !forwardEndReached[0] || getUserConfig().isPremium()) {
             return;
         }
         MessagesController.SponsoredMessagesInfo res = getMessagesController().getSponsoredMessages(dialog_id);
@@ -19588,7 +19588,8 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
         if (notPushedSponsoredMessages != null) {
             notPushedSponsoredMessages.clear();
         }
-        processNewMessages(res.messages);
+        processNewMessages(res.messages);*/
+        return;
     }
 
     private void checkGroupCallJoin(boolean fromServer) {
