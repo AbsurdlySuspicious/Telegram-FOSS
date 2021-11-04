@@ -5715,7 +5715,7 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public boolean isChatNoForwards(TLRPC.Chat chat) {
-        if (chat == null) {
+        /*if (chat == null) {
             return false;
         }
         if (chat.migrated_to != null) {
@@ -5724,7 +5724,8 @@ public class MessagesController extends BaseController implements NotificationCe
                 return migratedTo.noforwards;
             }
         }
-        return chat.noforwards;
+        return chat.noforwards;*/
+        return false;
     }
 
     public boolean isChatNoForwards(long chatId) {
@@ -19056,12 +19057,12 @@ public class MessagesController extends BaseController implements NotificationCe
                     posts_between = null;
                 } else {
                     if (res instanceof TLRPC.TL_messages_sponsoredMessages && (res.flags & 0x1) > 0) {
-                        posts_between = res.posts_between;
+                        posts_between = null;
                     } else {
                         posts_between = null;
                     }
                     result = new ArrayList<>();
-                    AndroidUtilities.runOnUIThread(() -> {
+                    /*AndroidUtilities.runOnUIThread(() -> {
                         putUsers(res.users, false);
                         putChats(res.chats, false);
                     });
@@ -19102,7 +19103,7 @@ public class MessagesController extends BaseController implements NotificationCe
                         messageObject.sponsoredCanReport = sponsoredMessage.can_report;
                         messageObject.sponsoredColor = sponsoredMessage.color;
                         result.add(messageObject);
-                    }
+                    }*/
                 }
             } else {
                 result = null;
