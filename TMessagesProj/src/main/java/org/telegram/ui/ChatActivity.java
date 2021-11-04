@@ -21641,6 +21641,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     private boolean sponsoredMessagesAdded;
     private Pattern sponsoredUrlPattern;
     private void addSponsoredMessages(boolean animated) {
+        /*
         if (sponsoredMessagesAdded || chatMode != 0 || !ChatObject.isChannel(currentChat) || !forwardEndReached[0] || getUserConfig().isPremium() && getMessagesController().isSponsoredDisabled()) {
             return;
         }
@@ -21682,12 +21683,16 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 }
             }
         }
+        */
         sponsoredMessagesAdded = true;
+        /*
         sponsoredMessagesPostsBetween = res.posts_between != null ? res.posts_between : 0;
         if (notPushedSponsoredMessages != null) {
             notPushedSponsoredMessages.clear();
         }
         processNewMessages(res.messages);
+        */
+        return;
     }
 
     private void removeFromSponsored(MessageObject message) {
