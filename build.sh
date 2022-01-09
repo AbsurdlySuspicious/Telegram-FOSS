@@ -8,6 +8,7 @@ git submodule deinit --all -f
 git submodule update --recursive --init -f
 
 pushd TMessagesProj/jni
+./build_libvpx_clang.sh
 ./build_ffmpeg_clang.sh
 ./patch_ffmpeg.sh
 ./patch_boringssl.sh
